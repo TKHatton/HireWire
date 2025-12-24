@@ -26,20 +26,17 @@ interface JobContextType {
 const JobContext = createContext<JobContextType | undefined>(undefined);
 
 const defaultResume: Resume = {
-  fullName: 'Alex Venture',
-  summary: 'Strategic technology leader with 8+ years experience in distributed systems and AI integration.',
+  fullName: '',
+  summary: '',
   experience: [],
   education: [],
   projects: [],
-  skills: 'React, TypeScript, Node.js, AWS, Kubernetes, LLM Orchestration',
-  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  skills: '',
+  avatar: '',
   regionalFormat: 'US-Resume'
 };
 
-const defaultSocials: SocialProfile[] = [
-  { platform: 'email', handle: 'alex@venture.com', url: 'mailto:alex@venture.com' },
-  { platform: 'linkedin', handle: 'alex-venture', url: 'https://linkedin.com/in/alex-venture' }
-];
+const defaultSocials: SocialProfile[] = [];
 
 export const JobProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [jobs, setJobs] = useState<Job[]>(() => {

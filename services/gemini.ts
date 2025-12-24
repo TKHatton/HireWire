@@ -103,11 +103,37 @@ export const chatWithHillary = async (message: string, context: string) => {
   return response.text || "I'm processing your request.";
 };
 
-export const generateAvatar = async (prompt: string) => {
+export const generateAvatar = async (prompt: string, baseImage?: string) => {
+  const parts: any[] = [];
+
+  // If a base image is provided, include it in the request for transformation
+  if (baseImage) {
+    // Extract base64 data if it's a data URL
+    const base64Data = baseImage.includes('base64,')
+      ? baseImage.split('base64,')[1]
+      : baseImage;
+
+    parts.push({
+      inlineData: {
+        mimeType: 'image/jpeg',
+        data: base64Data
+      }
+    });
+    parts.push({
+      text: `Transform this person's photo into a professional, corporate-style avatar with this setting: ${prompt}. Keep the person's face recognizable but place them in the described environment. Make it look polished and professional.`
+    });
+  } else {
+    // Generate from scratch if no base image
+    parts.push({
+      text: `A professional, corporate-style professional avatar: ${prompt}`
+    });
+  }
+
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
-    contents: { parts: [{ text: `A professional, corporate-style professional avatar: ${prompt}` }] },
+    contents: { parts },
   });
+
   if (response.candidates?.[0]?.content?.parts) {
     for (const part of response.candidates[0].content.parts) {
       if (part.inlineData) return `data:image/png;base64,${part.inlineData.data}`;

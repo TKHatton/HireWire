@@ -8,13 +8,13 @@ const Sidebar: React.FC = () => {
   const { activeView, setActiveView, resume } = useJobs();
 
   const menuItems: { id: ViewType; icon: any; label: string }[] = [
-    { id: 'dashboard', icon: LayoutDashboard, label: 'Control Room' },
-    { id: 'jobs', icon: Briefcase, label: 'Applications' },
-    { id: 'offers', icon: Trophy, label: 'Wins & Prep' },
-    { id: 'networking', icon: Users, label: 'The Nexus' },
-    { id: 'discovery', icon: Telescope, label: 'Discovery' },
-    { id: 'resume', icon: FileText, label: 'Protocol' },
-    { id: 'settings', icon: Settings, label: 'System' },
+    { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { id: 'jobs', icon: Briefcase, label: 'My Jobs' },
+    { id: 'offers', icon: Trophy, label: 'Interviews' },
+    { id: 'networking', icon: Users, label: 'Contacts' },
+    { id: 'discovery', icon: Telescope, label: 'Find Jobs' },
+    { id: 'resume', icon: FileText, label: 'Resume Builder' },
+    { id: 'settings', icon: Settings, label: 'Settings' },
   ];
 
   return (
@@ -26,7 +26,7 @@ const Sidebar: React.FC = () => {
           </div>
           <div>
             <span className="text-xl font-black tracking-tighter text-slate-900 block leading-none">HireWire</span>
-            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mt-1 block">AI Career Engine</span>
+            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mt-1 block">AI Job Search</span>
           </div>
         </div>
       </div>
@@ -54,9 +54,15 @@ const Sidebar: React.FC = () => {
       <div className="p-8">
         <div className="bg-slate-50 rounded-[2rem] p-5 border border-slate-100 shadow-sm">
           <div className="flex items-center gap-3 mb-5">
-            <img src={resume.avatar} className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" alt="User" />
+            {resume.avatar ? (
+              <img src={resume.avatar} className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" alt="User" />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm flex items-center justify-center text-slate-400 text-xs font-bold">
+                {resume.fullName ? resume.fullName[0].toUpperCase() : '?'}
+              </div>
+            )}
             <div className="flex-1 overflow-hidden">
-              <p className="text-xs font-black text-slate-900 truncate">{resume.fullName}</p>
+              <p className="text-xs font-black text-slate-900 truncate">{resume.fullName || 'Guest User'}</p>
               <p className="text-[9px] font-bold text-indigo-500 uppercase truncate">Verified Profile</p>
             </div>
           </div>

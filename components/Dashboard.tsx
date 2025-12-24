@@ -9,33 +9,57 @@ const Dashboard: React.FC = () => {
   const { jobs, setActiveView, hillaryContext } = useJobs();
 
   const stats = [
-    { label: 'Active Pipeline', value: hillaryContext.totalApplications, icon: Briefcase, color: 'indigo', trend: '+12%' },
-    { label: 'Interviews', value: hillaryContext.totalInterviews, icon: Clock, color: 'cyan', trend: `Rate: ${hillaryContext.conversionRate.toFixed(0)}%` },
-    { label: 'Offers Secured', value: hillaryContext.totalOffers, icon: Target, color: 'emerald', trend: 'Focus' },
-    { label: 'AI Readiness', value: '92%', icon: Zap, color: 'amber', trend: 'High' },
+    { label: 'Total Applications', value: hillaryContext.totalApplications, icon: Briefcase, color: 'indigo', trend: 'Active' },
+    { label: 'Interviews', value: hillaryContext.totalInterviews, icon: Clock, color: 'cyan', trend: `${hillaryContext.conversionRate.toFixed(0)}% Rate` },
+    { label: 'Offers', value: hillaryContext.totalOffers, icon: Target, color: 'emerald', trend: 'Received' },
+    { label: 'Success Rate', value: `${hillaryContext.conversionRate.toFixed(0)}%`, icon: Zap, color: 'amber', trend: hillaryContext.conversionRate > 20 ? 'Great' : 'Growing' },
   ];
 
-  const chartData = [
-    { name: 'Week 1', apps: 4 },
-    { name: 'Week 2', apps: 7 },
-    { name: 'Week 3', apps: 15 },
-    { name: 'Week 4', apps: 12 },
-    { name: 'Week 5', apps: 20 },
-  ];
+  // Generate chart data from actual job applications
+  const generateChartData = () => {
+    if (jobs.length === 0) return [];
+
+    // Group jobs by week
+    const weekMap = new Map<string, number>();
+    const now = new Date();
+    const fiveWeeksAgo = new Date(now.getTime() - 35 * 24 * 60 * 60 * 1000);
+
+    jobs.forEach(job => {
+      const jobDate = new Date(job.dateApplied);
+      if (jobDate >= fiveWeeksAgo) {
+        const weeksDiff = Math.floor((now.getTime() - jobDate.getTime()) / (7 * 24 * 60 * 60 * 1000));
+        const weekLabel = `Week ${5 - weeksDiff}`;
+        weekMap.set(weekLabel, (weekMap.get(weekLabel) || 0) + 1);
+      }
+    });
+
+    // Create array for last 5 weeks
+    const chartData = [];
+    for (let i = 1; i <= 5; i++) {
+      chartData.push({
+        name: `Week ${i}`,
+        apps: weekMap.get(`Week ${i}`) || 0
+      });
+    }
+
+    return chartData;
+  };
+
+  const chartData = generateChartData();
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-2 duration-500 pb-20">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Engine <span className="text-indigo-600">Overview</span></h1>
-          <p className="text-slate-500 mt-1 font-medium">Real-time performance metrics and strategic insights.</p>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Job Search <span className="text-indigo-600">Dashboard</span></h1>
+          <p className="text-slate-500 mt-1 font-medium">Track your applications, interviews, and offers in one place.</p>
         </div>
-        <button 
+        <button
           onClick={() => setActiveView('jobs')}
           className="flex items-center gap-2.5 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3.5 rounded-2xl transition-all shadow-lg shadow-indigo-100 font-bold text-sm"
         >
           <Plus className="w-4 h-4" />
-          Add Application
+          Add Job
         </button>
       </header>
 
@@ -61,17 +85,19 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Momentum Chart */}
+        {/* Application Activity Chart */}
         <div className="lg:col-span-8 hire-card p-8">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h3 className="text-lg font-bold text-slate-900 tracking-tight">Growth Velocity</h3>
-              <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Application density</p>
+              <h3 className="text-lg font-bold text-slate-900 tracking-tight">Application Activity</h3>
+              <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Weekly applications submitted</p>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 rounded-lg text-indigo-600 font-bold text-[10px] uppercase tracking-widest border border-indigo-100">
-              <TrendingUp className="w-3 h-3" />
-              OPTIMAL
-            </div>
+            {jobs.length > 0 && (
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 rounded-lg text-indigo-600 font-bold text-[10px] uppercase tracking-widest border border-indigo-100">
+                <TrendingUp className="w-3 h-3" />
+                TRACKING
+              </div>
+            )}
           </div>
           <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -100,15 +126,15 @@ const Dashboard: React.FC = () => {
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
               <Bot className="w-24 h-24" />
             </div>
-            <h4 className="text-xl font-black tracking-tight mb-2">Hillary's Pulse</h4>
+            <h4 className="text-xl font-black tracking-tight mb-2">AI Career Coach</h4>
             <p className="text-indigo-100 text-sm leading-relaxed mb-6 font-bold italic opacity-90">
-              "Your conversion rate is {hillaryContext.conversionRate.toFixed(1)}%. {hillaryContext.conversionRate > 20 ? "You're ahead of the curve!" : "Let's work on tailoring those cover letters."}"
+              "Your conversion rate is {hillaryContext.conversionRate.toFixed(1)}%. {hillaryContext.conversionRate > 20 ? "You're ahead of the curve!" : "Let's work on tailoring those applications."}"
             </p>
-            <button 
+            <button
               onClick={() => setActiveView('discovery')}
               className="w-full flex items-center justify-center gap-2 py-3.5 bg-white text-indigo-600 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all shadow-lg"
             >
-              Get Data Insight
+              Find More Jobs
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -116,7 +142,7 @@ const Dashboard: React.FC = () => {
           <div className="hire-card p-7">
             <h3 className="text-sm font-black text-slate-900 mb-6 flex items-center gap-2 uppercase tracking-widest">
               <Activity className="w-4 h-4 text-indigo-500" />
-              Live Deployment
+              Recent Applications
             </h3>
             <div className="space-y-5">
               {jobs.slice(-4).reverse().map((job, i) => (
@@ -134,7 +160,7 @@ const Dashboard: React.FC = () => {
                 </div>
               ))}
               {jobs.length === 0 && (
-                <p className="text-center py-6 text-slate-400 text-xs font-bold uppercase tracking-widest italic opacity-50">No signals detected.</p>
+                <p className="text-center py-6 text-slate-400 text-xs font-bold uppercase tracking-widest italic opacity-50">No applications yet.</p>
               )}
             </div>
           </div>

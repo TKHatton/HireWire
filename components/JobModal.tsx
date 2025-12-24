@@ -65,8 +65,8 @@ const JobModal: React.FC<{ isOpen: boolean; onClose: () => void; job?: any }> = 
       <div className="bg-white w-full max-w-4xl rounded-[2.5rem] shadow-2xl flex flex-col max-h-[95vh] border border-slate-200 overflow-hidden">
         <header className="p-8 border-b border-slate-100 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-black text-slate-900 tracking-tighter">Application <span className="text-indigo-600">Entry</span></h2>
-            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Configure deployment parameters</p>
+            <h2 className="text-2xl font-black text-slate-900 tracking-tighter">Add <span className="text-indigo-600">Job</span></h2>
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Enter job application details</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-slate-50 rounded-xl transition-all">
             <X className="w-5 h-5 text-slate-400" />

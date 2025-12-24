@@ -22,8 +22,8 @@ const JobTracker: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Application <span className="text-indigo-600">Pipeline</span></h1>
-          <p className="text-slate-500 mt-1 font-medium">Precision tracking for every career deployment.</p>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">My <span className="text-indigo-600">Jobs</span></h1>
+          <p className="text-slate-500 mt-1 font-medium">Track and manage all your job applications in one place.</p>
         </div>
         <button 
           onClick={() => { setEditingJob(null); setIsModalOpen(true); }}

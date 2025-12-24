@@ -26,8 +26,8 @@ const JobDiscovery: React.FC = () => {
     <div className="space-y-10 animate-in fade-in duration-500 pb-20">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Target <span className="text-indigo-600">Discovery</span></h1>
-          <p className="text-slate-500 mt-1 font-medium">AI-orchestrated search for high-probability opportunities.</p>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Find <span className="text-indigo-600">Jobs</span></h1>
+          <p className="text-slate-500 mt-1 font-medium">Get AI-powered job recommendations based on your skills and experience.</p>
         </div>
         <button 
           onClick={handleDiscover}
@@ -35,7 +35,7 @@ const JobDiscovery: React.FC = () => {
           className="flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl shadow-xl shadow-indigo-100 font-bold hover:bg-indigo-700 transition-all disabled:opacity-50"
         >
           {isDiscovering ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-          Run Discovery Engine
+          Get Job Recommendations
         </button>
       </header>
 
@@ -48,7 +48,7 @@ const JobDiscovery: React.FC = () => {
                   <Telescope className="w-8 h-8 text-slate-300" />
                 </div>
                 <h3 className="text-lg font-black text-slate-900">Analysis Required</h3>
-                <p className="text-slate-400 text-sm max-w-sm mt-2 font-medium">Click above to analyze your current pipeline and generate a new set of strategic targets.</p>
+                <p className="text-slate-400 text-sm max-w-sm mt-2 font-medium">Click above to get AI-powered job recommendations based on your applications and skills.</p>
               </div>
             ) : (
               <div className="animate-in fade-in duration-700 prose prose-slate max-w-none">

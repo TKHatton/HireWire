@@ -22,26 +22,26 @@ const ViewRenderer: React.FC = () => {
     case 'settings': return (
       <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500">
         <header>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">System <span className="text-indigo-600">Settings</span></h1>
-          <p className="text-slate-500 mt-1 font-medium italic">Configure your career engine parameters.</p>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">App <span className="text-indigo-600">Settings</span></h1>
+          <p className="text-slate-500 mt-1 font-medium italic">Manage your app preferences and data.</p>
         </header>
         <div className="hire-card p-10 space-y-8">
           <div className="flex items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100">
             <div>
-              <p className="font-black text-slate-900 text-sm uppercase tracking-widest">AI Engine Status</p>
-              <p className="text-xs text-slate-500 mt-1">Gemini 3-Flash Operational</p>
+              <p className="font-black text-slate-900 text-sm uppercase tracking-widest">AI Features</p>
+              <p className="text-xs text-slate-500 mt-1">Powered by Google Gemini AI</p>
             </div>
-            <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 text-[10px] font-black rounded-full border border-emerald-100 uppercase tracking-widest">Nominal</span>
+            <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 text-[10px] font-black rounded-full border border-emerald-100 uppercase tracking-widest">Active</span>
           </div>
           <div className="flex items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100">
             <div>
-              <p className="font-black text-slate-900 text-sm uppercase tracking-widest">Local Matrix Persistence</p>
-              <p className="text-xs text-slate-500 mt-1">Data encrypted in browser vault</p>
+              <p className="font-black text-slate-900 text-sm uppercase tracking-widest">Data Storage</p>
+              <p className="text-xs text-slate-500 mt-1">Stored securely in your browser</p>
             </div>
             <span className="px-4 py-1.5 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-full border border-indigo-100 uppercase tracking-widest">Active</span>
           </div>
           <button className="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-slate-100">
-            Purge All Records
+            Clear All Data
           </button>
         </div>
       </div>

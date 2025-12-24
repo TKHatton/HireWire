@@ -22,8 +22,8 @@ const NetworkingHub: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <header className="flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">The <span className="text-indigo-600">Nexus</span></h1>
-          <p className="text-slate-500 mt-1 font-medium">Strategic network management and contact tracking.</p>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tighter">My <span className="text-indigo-600">Contacts</span></h1>
+          <p className="text-slate-500 mt-1 font-medium">Manage your professional network and track your connections.</p>
         </div>
         <button onClick={() => setIsAdding(true)} className="flex items-center gap-2.5 bg-indigo-600 text-white px-6 py-3.5 rounded-2xl shadow-xl shadow-indigo-100 font-bold">
           <Plus className="w-4 h-4" />

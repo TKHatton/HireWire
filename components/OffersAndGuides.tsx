@@ -40,8 +40,8 @@ const OffersAndGuides: React.FC = () => {
   return (
     <div className="space-y-10 animate-in fade-in duration-500 pb-20">
       <header>
-        <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Mission <span className="text-indigo-600">Control</span></h1>
-        <p className="text-slate-500 mt-1 font-medium italic">Conversion from interview to offer starts here.</p>
+        <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Interview <span className="text-indigo-600">Prep</span></h1>
+        <p className="text-slate-500 mt-1 font-medium italic">Prepare for interviews and manage your offers.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -94,7 +94,7 @@ const OffersAndGuides: React.FC = () => {
             {interviewJobs.length === 0 && (
               <div className="p-16 text-center bg-white rounded-[2.5rem] border border-dashed border-slate-200">
                 <Sparkles className="w-8 h-8 text-slate-200 mx-auto mb-4" />
-                <p className="text-slate-400 font-bold text-sm italic">No missions active in final stages.</p>
+                <p className="text-slate-400 font-bold text-sm italic">No interviews or offers yet.</p>
               </div>
             )}
           </div>
@@ -103,7 +103,7 @@ const OffersAndGuides: React.FC = () => {
         <div className="lg:col-span-7 space-y-8">
           <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-3">
             <MessageSquareText className="w-4 h-4 text-cyan-500" />
-            Strategic Workspace
+            Interview Materials
           </h2>
           <div className="hire-card p-10 min-h-[600px] border-indigo-50/50 bg-white relative">
             {!activeContent ? (
@@ -111,14 +111,14 @@ const OffersAndGuides: React.FC = () => {
                 <div className="w-20 h-20 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-6">
                   <Zap className="w-10 h-10 text-slate-200" />
                 </div>
-                <h3 className="text-xl font-black text-slate-900">Protocol Dormant</h3>
-                <p className="text-slate-500 max-w-xs mx-auto mt-2 font-medium">Initialize a strategy guide or mock simulation to populate the workspace.</p>
+                <h3 className="text-xl font-black text-slate-900">No Interview Selected</h3>
+                <p className="text-slate-500 max-w-xs mx-auto mt-2 font-medium">Select an interview from the left to generate prep materials and practice questions.</p>
               </div>
             ) : (
               <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <div className="flex items-center gap-2 mb-8 p-3 bg-indigo-50 rounded-xl w-fit">
                   <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
-                  <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Live Strategic Feed</span>
+                  <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Generated Content</span>
                 </div>
                 <div className="prose prose-slate prose-indigo max-w-none">
                   {activeContent.split('\n').map((line, i) => (
