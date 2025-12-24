@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useJobs } from '../context/JobContext';
-import { Plus, Clock, ShieldAlert, Trophy, X, Calendar, DollarSign, CheckCircle2 } from 'lucide-react';
+import { Plus, Clock, ShieldAlert, Trophy, X, Calendar, DollarSign, CheckCircle2, Sparkles } from 'lucide-react';
 import { Job, JobStatus } from '../types';
 
 const QuickActions: React.FC = () => {
@@ -71,12 +71,20 @@ const QuickActions: React.FC = () => {
           Rejection
         </button>
 
-        <button 
+        <button
           onClick={() => setActiveModal('offer')}
           className="flex items-center gap-2 px-5 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs font-bold transition-all border border-emerald-100"
         >
           <Trophy className="w-3.5 h-3.5" />
           Got Offer
+        </button>
+
+        <button
+          onClick={() => setActiveView('resume')}
+          className="flex items-center gap-2 px-5 py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-xl text-xs font-bold transition-all border border-purple-100"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          Build Avatar
         </button>
       </div>
 

@@ -10,7 +10,44 @@ import NetworkingHub from './components/NetworkingHub';
 import JobDiscovery from './components/JobDiscovery';
 
 const ViewRenderer: React.FC = () => {
-  const { activeView } = useJobs();
+  const { activeView, setResume, setJobs, setContacts, setReminders, setSocialProfiles } = useJobs();
+
+  const handleClearAllData = () => {
+    if (window.confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+      localStorage.clear();
+      setResume({
+        fullName: '',
+        summary: '',
+        experience: [],
+        education: [],
+        projects: [],
+        skills: '',
+        avatar: '',
+        regionalFormat: 'US-Resume'
+      });
+      setJobs([]);
+      setContacts([]);
+      setReminders([]);
+      setSocialProfiles([]);
+      alert('All data has been cleared successfully.');
+    }
+  };
+
+  const handleClearProfile = () => {
+    if (window.confirm('Are you sure you want to clear your profile data? This will remove your name, avatar, and resume information.')) {
+      setResume({
+        fullName: '',
+        summary: '',
+        experience: [],
+        education: [],
+        projects: [],
+        skills: '',
+        avatar: '',
+        regionalFormat: 'US-Resume'
+      });
+      alert('Profile data has been cleared successfully.');
+    }
+  };
 
   switch (activeView) {
     case 'dashboard': return <Dashboard />;
@@ -40,9 +77,14 @@ const ViewRenderer: React.FC = () => {
             </div>
             <span className="px-4 py-1.5 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-full border border-indigo-100 uppercase tracking-widest">Active</span>
           </div>
-          <button className="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-slate-100">
-            Clear All Data
-          </button>
+          <div className="space-y-4">
+            <button onClick={handleClearProfile} className="w-full py-4 bg-amber-600 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-amber-700 transition-all shadow-lg shadow-amber-100">
+              Clear Profile Data
+            </button>
+            <button onClick={handleClearAllData} className="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-slate-100">
+              Clear All Data
+            </button>
+          </div>
         </div>
       </div>
     );
