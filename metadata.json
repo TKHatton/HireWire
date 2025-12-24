@@ -1,0 +1,8 @@
+{
+  "name": "JobFlow - Premium AI Job Tracker",
+  "description": "A high-end job application tracking system with AI-powered cover letter generation, interview prep, resume building, and an agentic companion.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
