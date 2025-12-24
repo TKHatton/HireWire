@@ -1,0 +1,13 @@
+/* Additional global styles for HireWire */
+/* Base styles are handled via Tailwind CDN in index.html */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

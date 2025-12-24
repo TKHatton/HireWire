@@ -28,7 +28,7 @@ const HillaryChat: React.FC = () => {
 
     try {
       const contextStr = `
-        User metrics: 
+        User metrics:
         - Apps: ${hillaryContext.totalApplications}
         - Interviews: ${hillaryContext.totalInterviews}
         - Offers: ${hillaryContext.totalOffers}
@@ -39,7 +39,6 @@ const HillaryChat: React.FC = () => {
       const response = await chatWithHillary(msgToSend, contextStr);
       setMessages(prev => [...prev, { role: 'assistant', text: response }]);
     } catch (error) {
-      console.error(error);
       setMessages(prev => [...prev, { role: 'assistant', text: "System overload! Let's try that again in a sec." }]);
     } finally {
       setIsLoading(false);

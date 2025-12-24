@@ -18,7 +18,11 @@ const OffersAndGuides: React.FC = () => {
       const guide = await generateInterviewGuide(job.role, job.company);
       updateJob({ ...job, interviewGuide: guide });
       setActiveContent(guide);
-    } catch (error) { console.error(error); } finally { setLoadingId(null); }
+    } catch (error) {
+      setActiveContent('Failed to generate guide. Please check your API key and try again.');
+    } finally {
+      setLoadingId(null);
+    }
   };
 
   const handleGenerateMock = async (job: any) => {
@@ -26,7 +30,11 @@ const OffersAndGuides: React.FC = () => {
     try {
       const questions = await generateMockQuestions(job.role, job.company, job.description);
       setActiveContent(questions);
-    } catch (error) { console.error(error); } finally { setMockId(null); }
+    } catch (error) {
+      setActiveContent('Failed to generate mock questions. Please check your API key and try again.');
+    } finally {
+      setMockId(null);
+    }
   };
 
   return (

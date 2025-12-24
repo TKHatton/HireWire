@@ -21,7 +21,11 @@ const ResumeBuilder: React.FC = () => {
       const data = `${resume.summary}. ${resume.experience.map(e => e.title + ': ' + e.content).join('. ')}`;
       const newSummary = await reformatResume(data, format);
       setResume(prev => ({ ...prev, summary: newSummary }));
-    } catch (e) { console.error(e); } finally { setIsReformatting(false); }
+    } catch (e) {
+      // Format change failed, keep existing summary
+    } finally {
+      setIsReformatting(false);
+    }
   };
 
   const handleGenerateSummary = async () => {
@@ -31,7 +35,11 @@ const ResumeBuilder: React.FC = () => {
       const combined = `${experienceStr}. ${resume.projects.map(p => p.name).join(', ')}`;
       const summary = await generateResumeSummary(resume.skills, combined);
       setResume({ ...resume, summary });
-    } catch (error) { console.error(error); } finally { setIsGenerating(false); }
+    } catch (error) {
+      // Summary generation failed, keep existing summary
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleGenerateAvatar = async () => {
@@ -39,7 +47,11 @@ const ResumeBuilder: React.FC = () => {
     try {
       const url = await generateAvatar(resume.skills);
       if (url) setResume({ ...resume, avatar: url });
-    } catch (error) { console.error(error); } finally { setIsAvatarGenerating(false); }
+    } catch (error) {
+      // Avatar generation failed, keep existing avatar
+    } finally {
+      setIsAvatarGenerating(false);
+    }
   };
 
   return (

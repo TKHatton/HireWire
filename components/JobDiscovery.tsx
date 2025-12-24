@@ -15,7 +15,11 @@ const JobDiscovery: React.FC = () => {
       const jobContext = jobs.map(j => `${j.role} at ${j.company}`).join(', ');
       const res = await discoverRelatedJobs(jobContext, resume.skills);
       setRecommendations(res);
-    } catch (error) { console.error(error); } finally { setIsDiscovering(false); }
+    } catch (error) {
+      setRecommendations('Discovery failed. Please check your API key and try again.');
+    } finally {
+      setIsDiscovering(false);
+    }
   };
 
   return (

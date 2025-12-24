@@ -42,7 +42,9 @@ const JobModal: React.FC<{ isOpen: boolean; onClose: () => void; job?: any }> = 
       const socialContext = socialProfiles.map(p => `${p.platform}: ${p.url}`).join(', ');
       const letter = await generateCoverLetter(formData.role, formData.company, resume.skills, socialContext);
       setFormData(prev => ({ ...prev, coverLetter: letter }));
-    } catch (error) { console.error(error); } 
+    } catch (error) {
+      setFormData(prev => ({ ...prev, coverLetter: 'Failed to generate cover letter. Please check your API key and try again.' }));
+    }
     finally { setIsGenerating(false); }
   };
 
@@ -52,7 +54,9 @@ const JobModal: React.FC<{ isOpen: boolean; onClose: () => void; job?: any }> = 
     try {
       const gap = await analyzeSkillGap(formData.description, resume.skills);
       setFormData(prev => ({ ...prev, skillGapAnalysis: gap }));
-    } catch (error) { console.error(error); }
+    } catch (error) {
+      setFormData(prev => ({ ...prev, skillGapAnalysis: 'Analysis failed. Please check your API key and try again.' }));
+    }
     finally { setIsAnalyzing(false); }
   };
 

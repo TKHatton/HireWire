@@ -1,7 +1,13 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY;
+
+if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
+  console.error('⚠️ Gemini API key is missing or invalid. Please set GEMINI_API_KEY in your .env.local file.');
+}
+
+const ai = new GoogleGenAI({ apiKey: apiKey || '' });
 
 export const generateCoverLetter = async (role: string, company: string, skills: string, socialContext?: string) => {
   const prompt = `Write a high-impact, modern cover letter for a ${role} position at ${company}. 
